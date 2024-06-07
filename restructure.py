@@ -9,6 +9,10 @@ from asyncio import *
 from datetime import *
 from cairosvg import svg2png
 
+
+
+
+
 class EST(tzinfo):
     def utcoffset(self, dt):
         return timedelta(hours = -5)
@@ -58,11 +62,7 @@ class ButtonView(discord.ui.View):
     app_commands.Choice(name="AK", value="1"),
 ])
 async def testingkit(interaction, weapon: app_commands.Choice[str], amount: int):
-    if amount >= 21:
-        await interaction.response.send_message("You don't need to craft more than 20 kits at a time.")
-        return
-    embed = discord.Embed(title=f"{amount}x {weapon.name} Kit")
-    open('NewAKkitIMG.svg', 'w').write(open('AKkitIMG.svg').read().replace("""Wood_text</title>x200</text>
+    AKstarting = f"""Wood_text</title>x200</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75" y="55"><title>MF_Text</title>x665</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135" y="55"><title>HQ_Text</title>x86</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195" y="55"><title>Cloth_Text</title>x290</text>
@@ -73,7 +73,8 @@ async def testingkit(interaction, weapon: app_commands.Choice[str], amount: int)
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195" y="115"><title>Spring_Text</title>x4</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135" y="115"><title>RB_Text</title>x1</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75" y="115"><title>Charcoal_Text</title>x810</text>
-    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="15" y="115"><title>Sulfur_Text</title>x540</text>""", f"""Wood_text</title>x{200 * amount}</text>
+    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="15" y="115"><title>Sulfur_Text</title>x540</text>"""
+    AKEnding = f"""Wood_text</title>x{200 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75" y="55"><title>MF_Text</title>x{665 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135" y="55"><title>HQ_Text</title>x{86 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195" y="55"><title>Cloth_Text</title>x{290 * amount}</text>
@@ -84,10 +85,9 @@ async def testingkit(interaction, weapon: app_commands.Choice[str], amount: int)
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195" y="115"><title>Spring_Text</title>x{4 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135" y="115"><title>RB_Text</title>x{1 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75" y="115"><title>Charcoal_Text</title>x{810 * amount}</text>
-    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="15" y="115"><title>Sulfur_Text</title>x{540 * amount}</text>"""))
+    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="15" y="115"><title>Sulfur_Text</title>x{540 * amount}</text>"""
 
-    svg2png(url="NewAKkitIMG.svg", write_to="AKkitIMG.png")
-    open('NewThompsonkitIMG.svg', 'w').write(open('ThompsonkitIMG.svg').read().replace("""Wood_text</title>x100</text>
+    Thompsonstarting = f"""Wood_text</title>x100</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75.792" y="55.527" transform="matrix(1, 0, 0, 1, 0.148682, 0)"><title>MF_Text</title>x360<tspan x="75.79199981689453" dy="1em">​</tspan></text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135.941" y="55.527"><title>HQ_Text</title>x21</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195.941" y="55.527"><title>Cloth_Text</title>x140</text>
@@ -97,7 +97,8 @@ async def testingkit(interaction, weapon: app_commands.Choice[str], amount: int)
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75.941" y="115.527"><title>SB_Text</title>x1</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135.941" y="115.527"><title>Spring_Text</title>x1</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195.941" y="115.527"><title>SK_Text</title>x2</text>
-    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="255.941" y="115.527"><title>Tarp_Text</title>x5</text>""", f"""Wood_text</title>x{100 * amount}</text>
+    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="255.941" y="115.527"><title>Tarp_Text</title>x5</text>"""
+    Thompsonending = f"""Wood_text</title>x{100 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75.792" y="55.527" transform="matrix(1, 0, 0, 1, 0.148682, 0)"><title>MF_Text</title>x{360 * amount}<tspan x="75.79199981689453" dy="1em">​</tspan></text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135.941" y="55.527"><title>HQ_Text</title>x{21 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195.941" y="55.527"><title>Cloth_Text</title>x{140 * amount}</text>
@@ -107,10 +108,19 @@ async def testingkit(interaction, weapon: app_commands.Choice[str], amount: int)
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="75.941" y="115.527"><title>SB_Text</title>x{1 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="135.941" y="115.527"><title>Spring_Text</title>x{1 * amount}</text>
     <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="195.941" y="115.527"><title>SK_Text</title>x{2 * amount}</text>
-    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="255.941" y="115.527"><title>Tarp_Text</title>x{5 * amount}</text>"""))
-    svg2png(url="NewThompsonkitIMG.svg", write_to="ThompsonkitIMG.png")
-    ak = discord.File("AKkitIMG.png")
-    thompson = discord.File("ThompsonkitIMG.png")
+    <text style="fill: rgb(255, 255, 255); font-family: C059; font-size: 10px; font-style: italic; font-weight: 700; white-space: pre;" x="255.941" y="115.527"><title>Tarp_Text</title>x{5 * amount}</text>"""
+    
+    if amount >= 21:
+        await interaction.response.send_message("You don't need to craft more than 20 kits at a time.")
+        return
+    embed = discord.Embed(title=f"{amount}x {weapon.name} Kit")
+    open('./SVGS/NewAKkitIMG.svg', 'w').write(open('./SVGS/AKkitIMG.svg').read().replace(f'{AKstarting}', f'{AKEnding}'))
+
+    svg2png(url="./SVGS/NewAKkitIMG.svg", write_to="./PNGS/AKkitIMG.png")
+    open('./SVGS/NewThompsonkitIMG.svg', 'w').write(open('./SVGS/ThompsonkitIMG.svg').read().replace(f'{Thompsonstarting}', f'{Thompsonending}'))
+    svg2png(url="./SVGS/NewThompsonkitIMG.svg", write_to="./PNGS/ThompsonkitIMG.png")
+    ak = discord.File("./PNGS/AKkitIMG.png")
+    thompson = discord.File("./PNGS/ThompsonkitIMG.png")
     if weapon.value == "0":
         embed.set_image(url="attachment://ThompsonkitIMG.png")
     elif weapon.value == "1":
